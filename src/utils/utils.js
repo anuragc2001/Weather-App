@@ -1,7 +1,9 @@
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') }) //new way to config dotenv
 const request = require('request');
 
 const getGeocode = (address, callback) => {
-    const url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(address) + ".json?access_token=pk.eyJ1IjoibmFnYXdlajQ0IiwiYSI6ImNrdzF0anU5bTIxZHEydXBobnp5N3NncmwifQ.W38cA2TM8ew5Wx-36T2IlA"
+    const url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(address) + ".json?access_token=" + process.env.WEATHERTOKEN
 
     request({ url: url, json: true }, (err, res) => {
         if (err) {
@@ -22,7 +24,7 @@ const getGeocode = (address, callback) => {
 }
 
 const getForecast = (lat, lon, callback) => {
-    const url = "http://api.weatherstack.com/current?access_key=17cd29c00e364ac59242a377c5e7f8e7&query=" + encodeURIComponent(lat) + "," + encodeURIComponent(lon) + "&units=m"
+    const url = "http://api.weatherstack.com/current?access_key=" + process.env.GEOCODEAPI + "&query=" + encodeURIComponent(lat) + "," + encodeURIComponent(lon) + "&units=m"
 
     request({ url: url, json: true }, (err, res) => {
         if (err) {
