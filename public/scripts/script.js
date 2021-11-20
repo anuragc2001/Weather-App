@@ -6,7 +6,7 @@ const p2 = document.querySelector(".p2")
 
 submit.addEventListener("click", (e) => {
     e.preventDefault()
-    const url = "http://localhost:3000/weather?address=" + input.value
+    const url = "/weather?address=" + input.value
 
     p1.innerHTML = "Loading..."
     p2.innerHTML = ""
